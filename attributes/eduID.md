@@ -51,3 +51,6 @@ if __name__ == '__main__':
 由于 UUID 是标准算法，因此各种编程语言都有现成的代码库可供调用，实现上非常方便。上海教育认证中心也提供了各种语言的示例代码和封装，和调试用的工具。
 
 详见：https://github.com/shanghai-edu/eduid
+
+#### 其他地区的类似方案
+其他地区亦有类似的实现方案，如 [swissEduID](https://www.switch.ch/aai/support/documents/attributes/swisseduid/)

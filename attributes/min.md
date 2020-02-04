@@ -2,13 +2,13 @@
 
 #### v2 最小属性集(草案)
 
-|字段|SAML OID|说明|
-|--|--|--|
-|eduPersonPrincipalName|urn:oid:1.3.6.1.4.1.5923.1.1.1.6|用户名+域名后缀,等效于 v1 的 uid@domainName|	
-|eduPersonNickname|urn:oid:1.3.6.1.4.1.5923.1.1.1.2|用户姓名,等效于 v1 的 cn|
-|eduPersonPrimaryAffiliation|urn:oid:1.3.6.1.4.1.5923.1.1.1.5|机构域名,例如 xxx.edu.cn,等效于 v1 的 domainName|
-|eduPersonScopeAffiliation|urn:oid:1.3.6.1.4.1.5923.1.1.1.9|用户身份,等效于 v1 的 typeOf@domainName|
-|eduPersonUniqueId|urn:oid:1.3.6.1.4.1.5923.1.1.1.13|等效于 v1 的 eduID|
+##### 联盟
+|字段|OID|说明|来源|
+|--|--|--|--|
+|eduPersonPrincipalName|1.3.6.1.4.1.5923.1.1.1.6|用户名+域名后缀,等效于 v1 的 uid@domainName|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
+|cn|urn:oid:2.5.4.3|用户姓名|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)，[RFC4519](https://tools.ietf.org/html/rfc4519)|
+|schacHomeOrganization|1.3.6.1.4.1.25178.1.2.9|机构域名,例如 xxx.edu.cn,等效于 v1 的 domainName|[SCHAC](https://wiki.refeds.org/display/STAN/SCHAC+Releases)|
+|eduPersonScopeAffiliation|urn:oid:1.3.6.1.4.1.5923.1.1.1.9|用户身份,等效于 v1 的 typeOf@domainName|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
 
 
 #### v1 最小属性集(历史兼容)

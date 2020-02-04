@@ -66,9 +66,13 @@ SSLCertificateKeyFile /home/letsencrypt/certs/idp.xxx.edu.cn/privkey.pem
 ssl_certificate /home/letsencrypt/certs/idp.xxx.edu.cn/fullchain.pem;
 ssl_certificate_key /home/letsencrypt/certs/idp.xxx.edu.cn/privkey.pem;
 ```
-3.2 重启 apahce 服务
+###### 重启 apahce 服务
 ```
 service httpd restart
+```
+or
+```
+service nginx restart
 ```
 
 ##### 自动续签脚本
