@@ -1,4 +1,4 @@
-# 2.3.5 idp 注册
+# 2.3.6 idp 注册
 
 修改 `metadata/idp-metadata.xml` 文件，在最后部分增加如下配置,以便于 metadata 合并的自动化处理
 
