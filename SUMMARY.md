@@ -1,7 +1,7 @@
 # Summary
 
 ## 第 Ⅰ 部分：上海教育认证中心
-* [1.1 上海教育认证中心](README.md)
+* [1.1 上海教育认证中心](SEAC.md)
 * [1.2 技术框架](tech/README.md)
     * [1.2.1 Shibboleth](tech/shibboleth.md)
     * [1.2.2 OAuth](tech/OAuth.md)
