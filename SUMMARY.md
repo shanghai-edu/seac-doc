@@ -5,7 +5,7 @@
 * [1.2 技术框架](tech/README.md)
     * [1.2.1 Shibboleth](tech/shibboleth.md)
     * [1.2.2 OAuth](tech/OAuth.md)
-* [1.3 属性规范](attirbutes/README.md)
+* [1.3 属性规范](attributes/README.md)
     * [1.3.1 最小属性集](attributes/min.md)
     * [1.3.2 推荐属性集](attributes/recommend.md)
     * [1.3.3 完整属性集](attributes/full.md)
