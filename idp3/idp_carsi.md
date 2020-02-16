@@ -3,7 +3,7 @@
 对于高校 IdP 而言，通常需要同时接入 CARSI 和 SEAC。由于协议的相通性，只需要一个 IdP 服务器，修改部分配置即可完成接入。本文列出需要修改配置的部分，供调试参考
 
 ### attribute-resolver
-在 `attribute-resolver.xml` 中，增加属性获取的配置，确保两个联盟所需的属性都已经获取
+在 `attribute-resolver.xml` 中，增加属性获取的配置，确保两个联盟所需的属性都已经获取。注意匹配一下映射关系
 ```xml
 
    <AttributeDefinition xsi:type="ScriptedAttribute" id="eduPersonScopedAffiliation">
@@ -20,14 +20,14 @@
     </AttributeDefinition>
 
    <AttributeDefinition xsi:type="Simple" id="uid">
-        <InputDataConnector ref="myLDAP" attributeNames="sAMAccountName"/>
+        <InputDataConnector ref="myLDAP" attributeNames="uid"/>
         <AttributeEncoder xsi:type="SAML1String" name="urn:mace:dir:attribute-def:uid" encodeType="false" />
         <AttributeEncoder xsi:type="SAML2String" name="urn:oid:2.5.4.2" friendlyName="uid" encodeType="false" />
    </AttributeDefinition>
 
 
    <AttributeDefinition xsi:type="Simple" id="cn">
-        <InputDataConnector ref="myLDAP" attributeNames="displayName"/>
+        <InputDataConnector ref="myLDAP" attributeNames="cn"/>
         <AttributeEncoder xsi:type="SAML1String" name="urn:mace:dir:attribute-def:cn" encodeType="false" />
         <AttributeEncoder xsi:type="SAML2String" name="urn:oid:2.5.4.3" friendlyName="cn" encodeType="false" />
    </AttributeDefinition>

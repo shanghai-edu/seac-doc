@@ -12,7 +12,7 @@
 #### yum 安装
 ```
 # wget http://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d
-yum install shibboleth httpd mod_ssl -y
+# yum install shibboleth httpd mod_ssl -y
 ```
 #### apache 配置
 ##### SSL 配置
