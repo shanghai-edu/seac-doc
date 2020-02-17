@@ -2,13 +2,15 @@
 
 #### v2 最小属性集
 ##### SEAC 核心属性(草案)
+v2 属性正在草案讨论中，随时可能有调整变更
+
 |字段|OID|说明|来源|
 |--|--|--|--|
-|shEduPersonUserId|1.3.6.1.4.1.55229.1.1.1.1|用户在子域的标识，通常等于用户名，等效于 v1 的 uid||
+|shEduPersonUserId|1.3.6.1.4.1.55229.1.1.1.1|用户在子域的标识，通常等于用户名，等效于 v1 的 uid|SEAC|
 |cn|2.5.4.3|用户姓名|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)，[RFC4519](https://tools.ietf.org/html/rfc4519)|
-|shEduPersonHomeOrganization|1.3.6.1.4.1.55229.1.1.1.4|子域域名||
+|shEduPersonHomeOrganization|1.3.6.1.4.1.55229.1.1.1.4|子域域名|SEAC|
 |eduPersonAffiliation|1.3.6.1.4.1.5923.1.1.1.1|身份|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
-|shEduId|1.3.6.1.4.1.55229.1.1.1.12|等效于 v1 的 eduID||
+|shEduId|1.3.6.1.4.1.55229.1.1.1.12|等效于 v1 的 eduID|SEAC|
 
 ##### 联盟核心属性
 如果期望 IdP 同时处于多个联盟，比如 SEAC 和 CARSI，那么需要至少释放其他联盟约定的核心属性
