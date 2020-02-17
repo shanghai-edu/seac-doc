@@ -12,9 +12,13 @@
 
 ##### 联盟核心属性
 如果期望 IdP 同时处于多个联盟，比如 SEAC 和 CARSI，那么需要至少释放其他联盟约定的核心属性
+
 |字段|OID|说明|来源|
 |--|--|--|--|
-|eduPersonPrincipalName|1.3.6.1.4.1.5923.1.1.1.6|用户名+域名后缀,等效于 v1 的 uid@domainName|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
+|eduPersonScopedAffiliation|1.3.6.1.4.1.5923.1.1.1.9|用户身份+scope 后缀|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
+|eduPersonTargetedID|1.3.6.1.4.1.5923.1.1.1.10|hash 脱敏的用户唯一标识|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
+|eduPersonEntitlement|1.3.6.1.4.1.5923.1.1.1.7|标识用户访问特定资源的权限的URI|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
+
 
 
 #### v1 最小属性集(历史兼容)
