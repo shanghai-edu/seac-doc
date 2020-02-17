@@ -54,3 +54,4 @@
 * [4.2 跨校选辅修](sp_introduce/kuaxiaofuxiu.md)
 * [4.3 东航校园行](sp_introduce/donghang.md)
 * [4.4 上海教育无线通](sp_introduce/wuxiantong.md)
+* [4.5 数据库期刊资源](sp_introduce/lib.md)
