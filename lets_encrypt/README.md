@@ -2,17 +2,21 @@
 
 由于几大证书商已经普遍不再签发 edu.cn 的免费证书,因此如若想使用免费证书,则只能选择 Lets encrypt 方案.
 
-本章介绍一个基于 `shell` 脚本的 lets encrypt 自动续签方案,没有依赖,在不同服务器环境下比较通用
+本章介绍一个基于 `shell` 脚本的 lets encrypt 自动续签方案,没有依赖,在不同服务器环境下比较通用.
+
+如果您有一定的 linux 运维基础，建议进一步了解一下 lets encrypt 官方推荐的证书签发工具 [certbot](https://certbot.eff.org/)
 
 ### lets encrypt 方案
 #### 下载签发脚本
 [下载地址](https://github.com/lukas2511/dehydrated/releases)
 统一安装在 `/home` 路径上，重命名为  `/home/letsencrypt`
 
-#### 续签证书
+#### 签发证书
+首先确认服务器已经对外开放 80 端口，并且需要签发证书的域名(例如 idp.xxx.edu.cn)，已经正确解析到该服务器的外网 ip 上。
 ##### 建校验目录
 `mkdir /var/www/dehydrated`
 ##### 映射校验 url 到校验目录
+该目录将用于临时生成用于 lets encrypt 自动校验的文件
 ###### apache
 修改 `/etc/httpd/conf/http.conf` 增加下面内容
 ```
@@ -56,6 +60,8 @@ service nginx restart
 ##### 部署证书
 ###### 修改证书路径-apache
 修改 `/etc/httpd/conf.d/ssl.conf` 中下面内容，即证书路径更改 letsencryt 中的证书
+
+注意当 apache 版本较低时必须同时配置中级证书，即使证书文件中已经包含了中级证书的内容。
 ###### apache < 2.4.8
 ```
 SSLCertificateFile /home/letsencrypt/certs/idp.xxx.edu.cn/fullchain.pem
