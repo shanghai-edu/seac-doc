@@ -56,11 +56,18 @@ service nginx restart
 ##### 部署证书
 ###### 修改证书路径-apache
 修改 `/etc/httpd/conf.d/ssl.conf` 中下面内容，即证书路径更改 letsencryt 中的证书
+###### apache < 2.4.8
 ```
 SSLCertificateFile /home/letsencrypt/certs/idp.xxx.edu.cn/fullchain.pem
 SSLCertificateChainFile /home/letsencrypt/certs/idp.xxx.edu.cn/chain.pem
 SSLCertificateKeyFile /home/letsencrypt/certs/idp.xxx.edu.cn/privkey.pem
 ```
+###### apache >= 2.4.8
+```
+SSLCertificateFile /home/letsencrypt/certs/idp.xxx.edu.cn/fullchain.pem
+SSLCertificateKeyFile /home/letsencrypt/certs/idp.xxx.edu.cn/privkey.pem
+```
+
 ###### 修改证书路径-nginx
 修改对应配置文件中下面内容，即证书路径更改 letsencryt 中的证书
 ```
