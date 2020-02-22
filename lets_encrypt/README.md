@@ -18,7 +18,7 @@
 ##### 映射校验 url 到校验目录
 该目录将用于临时生成用于 lets encrypt 自动校验的文件
 ###### apache
-修改 `/etc/httpd/conf/http.conf` 增加下面内容
+修改 `/etc/httpd/conf/httpd.conf` 增加下面内容
 ```
 Alias /.well-known/acme-challenge /var/www/dehydrated
 <Directory /var/www/dehydrated>
