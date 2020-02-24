@@ -1,6 +1,7 @@
 # Summary
 
 ## 第 Ⅰ 部分：上海教育认证中心
+* [Introduction](README.MD)
 * [1.1 上海教育认证中心](SEAC.md)
 * [1.2 技术框架](tech/README.md)
     * [1.2.1 Shibboleth](tech/shibboleth.md)
@@ -55,3 +56,5 @@
 * [4.3 东航校园行](sp_introduce/donghang.md)
 * [4.4 上海教育无线通](sp_introduce/wuxiantong.md)
 * [4.5 数据库期刊资源](sp_introduce/lib.md)
+* [4.6 上海高校计算机基础资源平台](sp_introduce/jsjjc.md)
+
