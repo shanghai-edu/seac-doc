@@ -11,6 +11,7 @@
 - 把下载的 `no-conversation-state.jsp` 放入 `/opt/shibboleth-idp/edit-webapp` 中
 - 把下载的 `cas-client-core-3.6.0.jar` 和 `shib-cas-authenticator-3.3.0.jar` 放入 `/opt/shibboleth-idp/edit-webapp/WEB-INF/lib` 中
 - 修改 `web.xml` 增加以下部分
+
 ```
 ...
     <!-- Servlet for receiving a callback from an external CAS Server and continues the IdP login flow -->
@@ -26,6 +27,7 @@
 ...
 ```
 - 修改 idp.properties 配置文件
+
 ```
 idp.authn.flows = External
 
@@ -43,6 +45,7 @@ shibcas.serverName = https://idp.xxx.edu.cn
 #### 从 3.2.3 升级
 首先确认 idp 已经升级到 3.4.6
 - 修改 `web.xml` ，调整为如下
+
 ```
 ...
     <!-- Servlet for receiving a callback from an external CAS Server and continues the IdP login flow -->
@@ -59,6 +62,7 @@ shibcas.serverName = https://idp.xxx.edu.cn
 ```
 - 修改 `idp.properties` 配置文件，将 flow 修改为 External  `idp.authn.flows=External` 
 - 删除 `/opt/shibboleth-idp/conf/authn/general-authn.xml` 中新增的 bean 内容，例如：
+  
 ```
         <bean id="authn/Shibcas" parent="shibboleth.AuthenticationFlow"
                 p:passiveAuthenticationSupported="true"
