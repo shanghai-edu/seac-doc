@@ -1,4 +1,4 @@
-# 2.3.2 IdP 安装
+# 2.3.2 IdP 升级
 
 #### 准备工作
 IdP 通过覆盖安装的方式进行升级，因此如果已经有点忘记了的话，建议回顾一下 IdP 的 [安装](https://eac.cloud.sh.edu.cn/document/idp3/install.html) 文档以熟悉流程。
