@@ -1,16 +1,24 @@
-# 2.3.3 cas 对接
+# 2.3.4 cas 对接
 
 ### 准备工作
 - 使用 [Unicon/shib-cas-authn3](https://github.com/Unicon/shib-cas-authn3) 插件
-- 下载 [cas-client-core-3.6.0.jar](https://github.com/Unicon/shib-cas-authn3/releases/download/3.3.0/cas-client-core-3.6.0.jar) 和 [shib-cas-authenticator-3.3.0.jar](https://github.com/Unicon/shib-cas-authn3/releases/download/3.3.0/shib-cas-authenticator-3.3.0.jar) 两个 jar 包
-- 下载 [no-conversation-state.jsp](https://raw.githubusercontent.com/Unicon/shib-cas-authn3/master/IDP_HOME/edit-webapp/no-conversation-state.jsp) 文件
+- 下载相关的 [cas-client-core-3.6.0.jar
+](https://eac.cloud.sh.edu.cn/download/cas-client-core-3.6.0.jar) 和 [shib-cas-authenticator-3.3.0.jar
+](https://eac.cloud.sh.edu.cn/download/shib-cas-authenticator-3.3.0.jar)文件备用。
+- 下载 [no-conversation-state.jsp](https://eac.cloud.sh.edu.cn/download/no-conversation-state.jsp) 文件备用
 - IdP 版本至少 3.4.6
 
 #### 直接安装
 首先确保 IdP 版本为 3.4.6 以上
 - 把下载的 `no-conversation-state.jsp` 放入 `/opt/shibboleth-idp/edit-webapp` 中
 - 把下载的 `cas-client-core-3.6.0.jar` 和 `shib-cas-authenticator-3.3.0.jar` 放入 `/opt/shibboleth-idp/edit-webapp/WEB-INF/lib` 中
-- 修改 `web.xml` 增加以下部分
+- 将 `/opt/shibboleth-idp/dist/webapp/WEB-INF/web.xml` 拷贝到 `/opt/shibboleth-idp/edit-webapp/WEB-INF/web.xml`
+
+```
+cp /opt/shibboleth-idp/dist/webapp/WEB-INF/web.xml /opt/shibboleth-idp/edit-webapp/WEB-INF/web.xml
+```
+
+- 修改 `/opt/shibboleth-idp/edit-webapp/WEB-INF/web.xml` 增加以下部分
 
 ```
 ...
