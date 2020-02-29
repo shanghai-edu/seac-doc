@@ -36,9 +36,11 @@
     * [2.3.6 属性释放配置](idp3/idp_filter.md)
     * [2.3.7 idp 注册](idp3/idp_metadata.md)
     * [2.3.8 CARSI-IdP 接入](idp3/idp_carsi.md)
-* [2.3 IDaaS](idaas/README.md)
-* [2.4 SSL 证书](lets_encrypt/README.md)
-* [2.5 上线测试](idptest/README.md)
+* [2.3 第三方 IdP](idpthird/README.md)
+    * [2.3.1 微软 ADFS](idpthird/adfs.md)
+* [2.4 IDaaS](idaas/README.md)
+* [2.5 SSL 证书](lets_encrypt/README.md)
+* [2.6 上线测试](idptest/README.md)
 
 ## 第 Ⅲ 部分：SP 接入
 * [3.1 Shibboleth-sp 模式](sp/README.md)
