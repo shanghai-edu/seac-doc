@@ -4,7 +4,7 @@ Active Directory 联合身份验证服务（AD FS，Active Directory Federation 
 
 ### 相关参考资料
 
-[Active Directory Federation Services](https://docs.microsoft.com/en-us/windows-server/identity/active-directory-federation-services)
+[Active Directory 联合身份验证服务](https://docs.microsoft.com/zh-cn/windows-server/identity/active-directory-federation-services)
 
-[AD FS 2.0 Step-by-Step Guide: Federation with Shibboleth 2 and the InCommon Federation](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/gg317734(v=ws.10)?redirectedfrom=MSDN)
+[配置门户的 SAML 2.0 提供程序设置](https://docs.microsoft.com/zh-cn/powerapps/maker/portals/configure/configure-saml2-settings)
 
