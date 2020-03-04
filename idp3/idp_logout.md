@@ -29,8 +29,14 @@ idp.storage.htmlLocalStorage = true
 #### 浏览器支持
 `SLO` 需要现代浏览器的支持，任何支持 `HTML5 LocalStorage` 的现代浏览器都可以支持。简单来说，不要用 `IE` 就好了。
 
+#### CAS/OAuth2 注销
+当 IdP 对接 CAS/OAuth2 时，我们需要在注销 IdP 的同时，也注销掉 CAS/OAuth2 上的会话。这部分可以通过在 IdP 的 `logout.vm` 中以不可见的 `iframe` 调用 CAS/OAuth2 的注销接口实现，比如:
+```
+<iframe style="display:none" src="https://cas.example.org/cas/logout"></iframe>
+```
+
 #### SAML 注销
-前面所描述是通过 IdP 的注销接口注销。在实际使用中，用户可能更多会从 SP 测发起注销。此时，如果要实现 `SLO` ，那么需要 IdP 开启相应的 `SAML SLO` 支持。默认情况下，这些 `endpoint` 是注释的，需要更新相应的 `Metadata`.
+前面所描述是通过 IdP 的注销接口注销。在实际使用中，用户可能更多会从 SP 侧发起注销。此时，如果要实现 `SLO` ，那么需要 IdP 开启相应的 `SAML SLO` 支持。默认情况下，这些 `endpoint` 是注释的，需要更新相应的 `Metadata`.
 
 取消 `metadata` 中 `SingleLogoutService` 部分的注释，并重新向联盟提交 `metadata`
 ```
@@ -48,10 +54,3 @@ idp.storage.htmlLocalStorage = true
 idp.session.secondaryServiceIndex = true
 ```
 同样的，基于 `cookie` 的 `session` 存储不支持 `SAML SLO`，请开启 `HTML LocalStorage` 模式
-
-#### CAS/OAuth2 注销
-当 IdP 对接 CAS/OAuth2 时，我们需要在注销 IdP 的同时，也注销掉 CAS/OAuth2 上的会话。这部分可以通过在 IdP 的 `logout.vm` 中以不可见的 `iframe` 调用 CAS/OAuth2 的注销接口实现，比如:
-```
-<iframe style="display:none" src="https://cas.example.org/cas/logout"></iframe>
-
-```
