@@ -48,3 +48,10 @@ idp.storage.htmlLocalStorage = true
 idp.session.secondaryServiceIndex = true
 ```
 同样的，基于 `cookie` 的 `session` 存储不支持 `SAML SLO`，请开启 `HTML LocalStorage` 模式
+
+#### CAS/OAuth2 注销
+当 IdP 对接 CAS/OAuth2 时，我们需要在注销 IdP 的同时，也注销掉 CAS/OAuth2 上的会话。这部分可以通过在 IdP 的 `logout.vm` 中以不可见的 `iframe` 调用 CAS/OAuth2 的注销接口实现，比如:
+```
+<iframe style="display:none" src="https://cas.example.org/cas/logout"></iframe>
+
+```

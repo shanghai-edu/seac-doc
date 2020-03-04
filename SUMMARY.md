@@ -41,7 +41,8 @@
     * [2.3.1 微软 ADFS](idpthird/adfs.md)
 * [2.4 IDaaS](idaas/README.md)
 * [2.5 SSL 证书](lets_encrypt/README.md)
-* [2.6 上线测试](idptest/README.md)
+* [2.6 反向代理](proxy/README.md)
+* [2.7 上线测试](idptest/README.md)
 
 ## 第 Ⅲ 部分：SP 接入
 * [3.1 Shibboleth-sp 模式](sp/README.md)
