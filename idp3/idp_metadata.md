@@ -1,5 +1,18 @@
 # 2.3.7 idp 注册
 
+#### Metadata 同步
+修改 `metadata/metadata-providers.xml` ，同步上海教育认证中心的 `metadata`
+```xml
+    <MetadataProvider id="HTTPMetadataShec"
+                      xsi:type="FileBackedHTTPMetadataProvider"
+                      backingFile="/opt/shibboleth-idp/metadata/ds.shec.edu.cn.xml"
+                      minRefreshDelay="PT5M" 
+                      maxRefreshDelay="PT10M" 
+                      metadataURL="https://ds.shec.edu.cn/metadata.xml">
+    </MetadataProvider>
+```
+
+#### 注册
 修改 `metadata/idp-metadata.xml` 文件，在最后部分增加如下配置,以便于 metadata 合并的自动化处理
 
 ```xml
@@ -13,3 +26,4 @@
 ```
 
 然后邮件 its@cloud.sh.edu.cn 申请上线
+
