@@ -1,4 +1,4 @@
-# 2.3.7 idp 注册
+# 2.3.8 idp 注册
 
 #### Metadata 同步
 修改 `metadata/metadata-providers.xml` ，同步上海教育认证中心的 `metadata`
