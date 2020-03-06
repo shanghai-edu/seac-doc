@@ -38,6 +38,7 @@
     * [2.3.8 metadata 同步和注册](idp3/idp_metadata.md)
     * [2.3.9 注销配置](idp3/idp_logout.md)
     * [2.3.10 CARSI-IdP 接入](idp3/idp_carsi.md)
+    * [2.3.11 IdP 的监控](idp3/monitor.md)
 * [2.3 第三方 IdP](idpthird/README.md)
     * [2.3.1 微软 ADFS](idpthird/adfs.md)
 * [2.4 IDaaS](idaas/README.md)
