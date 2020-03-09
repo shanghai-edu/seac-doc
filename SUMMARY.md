@@ -64,4 +64,5 @@
 * [4.4 上海教育无线通](sp_introduce/wuxiantong.md)
 * [4.5 数据库期刊资源](sp_introduce/lib.md)
 * [4.6 上海高校计算机基础资源平台](sp_introduce/jsjjc.md)
+* [4.7 上海市教委直播平台](sp_introduce/zhibo.md)
 
