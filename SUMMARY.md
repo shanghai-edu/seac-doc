@@ -39,6 +39,7 @@
     * [2.3.9 注销配置](idp3/idp_logout.md)
     * [2.3.10 CARSI-IdP 接入](idp3/idp_carsi.md)
     * [2.3.11 IdP 的监控](idp3/monitor.md)
+    * [2.3.12 认证成功后与数据库的对接](idp3/database.md)
 * [2.3 第三方解决方案](idpthird/README.md)
     * [2.3.1 微软 ADFS](idpthird/adfs.md)
 * [2.4 IDaaS](idaas/README.md)
