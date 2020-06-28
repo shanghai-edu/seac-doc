@@ -172,7 +172,7 @@ Content-type: text/html; charset=UTF-8
   "shEduId": "", 
   "shEduPersonMajor": "", 
   "mobile": "", 
-  "shEduPersonUserId": "", 
+  "shEduPersonUserId": "20150073", 
   "shEduPersonGrade": "", 
   "shEduPersonGender": "", 
   "shEduPersonHomeOrganizationType": "", 
