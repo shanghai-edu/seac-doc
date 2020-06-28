@@ -240,3 +240,9 @@ Content-type: text/html; charset=UTF-8
   }
 }
 ```
+
+#### 注销
+直接在授权网关的 shibboleth 接口上注销即可
+```
+https://sog.example.org/Shibboleth.sso/Logout
+```
