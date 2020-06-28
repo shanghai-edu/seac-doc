@@ -128,6 +128,7 @@ access_token 可以是 Bearer 方式，或者请求参数方式携带，都支�
 |shEduPersonDateOfBirth|string|生日|
 |shEduPersonGender|string|性别|
 |shEduPersonHomeOrganization|string|子域域名|
+|hEduPersonHomeOrganizationName|string|子域名称|
 |shEduPersonHomeOrganizationType|string|子域类别|
 |shEduPersonDepartment|string|对于高校学生，院系。对于高校教职工，部门|
 |shEduPersonMajor|string|对于高校学生，专业|
@@ -138,6 +139,8 @@ access_token 可以是 Bearer 方式，或者请求参数方式携带，都支�
 |shEduPersonSchool|string|对普教，学校|
 |shEduId|string|eduID|
 |eduPersonPrincipalName|string|用户名@域名，例如 200000@ecnu.edu.cn|
+|eduPersonAffiliation|string|身份类别，取值为：faculty, student, staff, alum, member, affiliate, employee|
+|eduPersonScopeAffiliation|string|eduPersonAffiliation+@域名，例如 faculty@ecnu.edu.cn|
 |mail|string|邮箱|
 |cn|string|姓名|
 |mobile|string|手机号|
@@ -165,7 +168,7 @@ Content-type: text/html; charset=UTF-8
 {
   "shEduPersonMatriculationDate": "", 
   "shEduPersonSchool": "", 
-  "cn": "", 
+  "cn": "冯骐", 
   "shEduId": "", 
   "shEduPersonMajor": "", 
   "mobile": "", 
@@ -173,15 +176,67 @@ Content-type: text/html; charset=UTF-8
   "shEduPersonGrade": "", 
   "shEduPersonGender": "", 
   "shEduPersonHomeOrganizationType": "", 
-  "eduPersonAffiliation": "", 
+  "eduPersonAffiliation": "faculty", 
   "eduPersonScopeAffiliation": "", 
-  "shEduPersonHomeOrganization": "", 
+  "shEduPersonHomeOrganization": "ecnu.edu.cn", 
   "mail": "", 
   "shEduPersonClass": "", 
   "eduPersonPrincipalName": "20150073@ecnu.edu.cn", 
-  "shEduPersonHomeOrganizationName": "", 
+  "shEduPersonHomeOrganizationName": "华东师范大学", 
   "shEduPersonDepartment": "", 
   "shEduPersonDateOfBirth": "", 
   "shEduPersionStageOfStudy": ""
+}
+```
+
+
+#### 获取用户信息-兼容接口
+该接口兼容认证中心模式的 oauth2 属性接口，可便于原认证中心模式下的应用快速迁移。
+##### 请求方式
+`GET /oauth/legacy/userinfo`
+或
+`POST /oauth/legacy/userinfo`
+##### 请求参数
+字段名|类型|是否必须|备注
+--|--|--|--
+access_token|string|是|请求的 access_token
+
+access_token 可以是 Bearer 方式，或者请求参数方式携带，都支持。
+
+##### 返回参数
+|字段|类型|说明|
+|--|--|--|
+|ZYM|string|子域标识符，等同于 oauth/v1/userinfo 中的 shEduPersonHomeOrganization|
+|ZYMC|string|子域名称，等同于 oauth/v1/userinfo 中的 shEduPersonHomeOrganizationName|
+|RYLX|string|人员类型，等同于 oauth/v1/userinfo 中的 eduPersonAffiliation|
+|UID|string|用户名，等同于 oauth/v1/userinfo 中的 shEduPersonUserId|
+|XM|string|姓名，等同于 oauth/v1/userinfo 中的 cn|
+
+Request
+```
+GET /oauth/legacy/userinfo HTTP/1.1
+Host: sog.example.org
+Content-length: 0
+Authorization: Bearer 53164bdf78d7f7755b3cc65666c8aa20cfacd139
+```
+Response
+```
+HTTP/1.1 200 OK
+Content-length: 139
+Content-location: https://sog.example.org/oauth/legacy/userinfo
+X-powered-by: PHP/7.4.5
+Server: nginx
+Connection: keep-alive
+Date: Sun, 28 Jun 2020 02:08:26 GMT
+Content-type: text/html; charset=UTF-8
+{
+  "type": 1, 
+  "user": {
+    "ZYM": "ecnu.edu.cn", 
+    "ZYMC": "华东师范大学", 
+    "RYLX": "faculty", 
+    "UID": "20150073", 
+    "XM": "冯骐"
+  }
 }
 ```
