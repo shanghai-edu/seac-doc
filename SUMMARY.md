@@ -55,6 +55,7 @@
     * [2.3.12 IdP 的监控](idp4/monitor.md)
 * [2.4 第三方解决方案](idpthird/README.md)
     * [2.4.1 微软 ADFS](idpthird/adfs.md)
+    * [2.4.2 深澜 Srun-LDAP](idpthird/Srun.md)
 * [2.5 IDaaS](idaas/README.md)
 * [2.6 SSL 证书](lets_encrypt/README.md)
 * [2.7 反向代理](proxy/README.md)
