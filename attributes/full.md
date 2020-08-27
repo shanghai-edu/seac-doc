@@ -21,5 +21,5 @@
 |eduPersonScopedAffiliation|1.3.6.1.4.1.5923.1.1.1.9|用户身份+scope 后缀|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
 |eduPersonTargetedID|1.3.6.1.4.1.5923.1.1.1.10|hash 脱敏的用户唯一标识|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
 |eduPersonEntitlement|1.3.6.1.4.1.5923.1.1.1.7|标识用户访问特定资源的权限的URI|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
-cn|2.5.4.3|用户姓名|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)，[RFC4519](https://tools.ietf.org/html/rfc4519)|
+|cn|2.5.4.3|用户姓名|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)，[RFC4519](https://tools.ietf.org/html/rfc4519)|
 |eduPersonAffiliation|1.3.6.1.4.1.5923.1.1.1.1|身份|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
