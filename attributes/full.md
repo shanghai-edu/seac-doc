@@ -17,7 +17,7 @@
 |shEduPersonClass|1.3.6.1.4.1.55229.1.1.1.11|对普教，班级||
 |shEduPersonSchool|1.3.6.1.4.1.55229.1.1.1.12|对普教，学校||
 |shEduId|1.3.6.1.4.1.55229.1.1.1.13|eduID||
-|shEduPersonCourse||1.3.6.1.4.1.55229.1.1.1.14|对普教，任教学科||
+|shEduPersonCourse|1.3.6.1.4.1.55229.1.1.1.14|对普教，任教学科||
 |eduPersonScopedAffiliation|1.3.6.1.4.1.5923.1.1.1.9|用户身份+scope 后缀|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|	
 |eduPersonTargetedID|1.3.6.1.4.1.5923.1.1.1.10|hash 脱敏的用户唯一标识|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
 |eduPersonEntitlement|1.3.6.1.4.1.5923.1.1.1.7|标识用户访问特定资源的权限的URI|[eduPerson](https://wiki.refeds.org/display/STAN/eduPerson)|
