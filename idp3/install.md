@@ -77,13 +77,10 @@ opt/shibboleth-idp# bin/build.sh
          antiResourceLocking="false"
          swallowOutput="true">
  
-    <!-- Work around lack of Max-Age support in IE/Edge -->
-    <CookieProcessor alwaysAddExpires="true" />
- 
 </Context>
 ```
 - Tomcat 默认监听 8080 和 8443 端口。一般我们需要把他改成 80 和 443，你可以在```TOMCAT_HOME/conf/server.xml```修改这个。本文示例中，我们将用 apache 来代理 Tomcat，所以不去管它。
-- - Tomcat 默认没有提供 Java Server Tag Library，这使得 idP3 的 status 页面无法显示。解决的办法是下载 [jstl的jar包](https://build.shibboleth.net/nexus/service/local/repositories/thirdparty/content/javax/servlet/jstl/1.2/jstl-1.2.jar)，然后放在 idp.home/edit-webapp/WEB-INF/lib/ 内，然后需要重新 Build 一下 idp。在 idp.home 的目录下，```./bin/build.sh``` 即可
+- - Tomcat 默认没有提供 Java Server Tag Library，这使得 idP3 的 status 页面无法显示。解决的办法是下载 [jstl的jar包](https://build.shibboleth.net/nexus/service/local/repositories/thirdparty/content/javax/servlet/jstl/1.2/jstl-1.2.jar)，然后放在 tomcat 的 lib 里，例如 `/usr/share/tomcat/lib`
 - 添加以下参数到 CATALINA_OPTS 的环境变量。
 	- ```-Didp.home=<location> ``` <location> 替换为你实际的路径
 	- v3.12以后的版本中，idp.home 也可以通过 web.xml 来指定。在 edit-webapp 目录下创建web.xml，然后重新 build idp.war
