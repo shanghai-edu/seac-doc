@@ -101,100 +101,12 @@ opt/shibboleth-idp# bin/build.sh
 
 #### 使用反向代理
 
-idP 部署在 tomcat 上，可以设置 http 对 tomcat 的代理，以便于维护和增强扩展性。
-这里以 apache 做 ajp 反向代理为例
+IdP 部署在 tomcat 上，可以对其进行反向代理来提供灵活性。
 
-取消 tomcat 的 AJP 身份认证（如果需要的话）
-修改```TOMCAT_HOME/conf/server.xml```
-在 ```<!-- Define an AJP 1.3 Connector on port 8009 -->```下修改
-```xml
-<Connector port="8009" address="127.0.0.1"
-               enableLookups="false" redirectPort="443" protocol="AJP/1.3"
-               tomcatAuthentication="false" />
-```
-
-配置 apache 的 ajp 反向代理
-修改 httpd.conf
-```ProxyPass /idp/ ajp://localhost:8009/idp/```
+配置详见 [反向代理](https://eac.cloud.sh.edu.cn/document/proxy/)
 
 #### 部署 ssl 证书
 
-在 apache 上部署 ssl 证书可比 tomcat 容易多了.可以使用 lets encrypt
+HTTP 的 SSL 证书，可以采购商用证书，也可以使用 Let's Encrypt 自签。
 
-查看```/etc/httpd/conf.d/ssl.conf```
-在对应路径下部署证书
-
-#### idP 状态的查看
-
-```idp.home/bin/status.sh```
-```
-### Operating Environment Information
-operating_system: Linux
-operating_system_version: 2.6.32-696.el6.x86_64
-operating_system_architecture: amd64
-jdk_version: 1.8.0_131
-available_cores: 2
-used_memory: 749 MB
-maximum_memory: 1500 MB
-
-### Identity Provider Information
-idp_version: 3.3.1
-start_time: 2017-05-04T00:23:39+08:00
-current_time: 2017-05-04T00:24:01+08:00
-uptime: 21304 ms
-
-service: shibboleth.LoggingService
-last successful reload attempt: 2017-05-03T16:22:09Z
-last reload attempt: 2017-05-03T16:22:09Z
-
-service: shibboleth.ReloadableAccessControlService
-last successful reload attempt: 2017-05-03T16:22:16Z
-last reload attempt: 2017-05-03T16:22:16Z
-
-service: shibboleth.MetadataResolverService
-last successful reload attempt: 2017-05-03T16:22:16Z
-last reload attempt: 2017-05-03T16:22:16Z
-
-service: shibboleth.RelyingPartyResolverService
-last successful reload attempt: 2017-05-03T16:22:14Z
-last reload attempt: 2017-05-03T16:22:14Z
-
-service: shibboleth.NameIdentifierGenerationService
-last successful reload attempt: 2017-05-03T16:22:14Z
-last reload attempt: 2017-05-03T16:22:14Z
-
-service: shibboleth.AttributeResolverService
-last successful reload attempt: 2017-05-03T16:22:14Z
-last reload attempt: 2017-05-03T16:22:14Z
-
-        DataConnector staticAttributes: has never failed
-
-service: shibboleth.AttributeFilterService
-last successful reload attempt: 2017-05-03T16:22:14Z
-last reload attempt: 2017-05-03T16:22:14Z
-```
-
-#### 服务的启停
-
-Tomcat服务的启停
-```
-TOMCAT_HOME/bin/startup.sh
-TOMCAT_HOME/bin/shutdown.sh
-```
-Apache服务的启停
-```
-systemctl start httpd
-systemctl stop httpd
-```
-
-可以设置为系统自动启动服务
-```
-systemctl start httpd
-systemctl enable httpd
-```
-修改```/etc/rc.local```
-添加
-```
-TOMACT_HOME/bin/startup.sh
-```
-
+配置详见 [SSL证书](https://eac.cloud.sh.edu.cn/document/lets_encrypt/)

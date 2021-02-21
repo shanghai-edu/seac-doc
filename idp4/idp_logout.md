@@ -1,4 +1,4 @@
-# 2.3.9 注销配置
+# 注销配置
 
 ### 普通注销
 如果用户以 `GET` 方式请求 `/profile/Logout` ，并且存在合法的会话的话，那么这个会话将被注销，用户会跳到注销页面（模板视图是 `logout.vm`），该页面会告诉用户以下事项：
@@ -12,14 +12,14 @@
 相关配置选项均在 `idp.properties` 中修改
 
 #### track SP Sessions
-只有开启了了 `trackSPSessions`，才能使用 `SLO`。
+IdP4 默认应该自动开启了 `trackSPSessions`，如果未开启请手动开启。
 ```
 idp.session.trackSPSessions = true
 ```
 #### HTML LocalStorage
 由于默认情况下，idp 的 `session` 存储方式是基于 `cookie` 的，并且不支持 `track SP Sessions`。所以必须要开启其他的存储模式。可以使用 `HTML LocalStorage` ，或者使用服务端存储。
 
-开启 `HTML LocalStorage` 只需要修改以下配置选项
+IdP4 默认应该自动开启了 `HTML LocalStorage` 如果未开启请手动开启。
 ```
 idp.storage.htmlLocalStorage = true
 ```
@@ -38,6 +38,7 @@ idp.storage.htmlLocalStorage = true
 #### SAML 注销
 前面所描述是通过 IdP 的注销接口注销。在实际使用中，用户可能更多会从 SP 侧发起注销。此时，如果要实现 `SLO` ，那么需要 IdP 开启相应的 `SAML SLO` 支持。默认情况下，这些 `endpoint` 是注释的，需要更新相应的 `Metadata`.
 
+IdP4 已经默认开启了 SLO 的相关端点，对于从 IdP3 升级而来的 IdP4 服务器，你需要打开这部分端点，并向重新向联盟提交 `metadata`
 取消 `metadata` 中 `SingleLogoutService` 部分的注释，并重新向联盟提交 `metadata`
 ```
 <!--
@@ -49,7 +50,7 @@ idp.storage.htmlLocalStorage = true
         
 -->
 ```
-然后开启下面的配置
+然后确保开启下面的配置
 ```
 idp.session.secondaryServiceIndex = true
 ```

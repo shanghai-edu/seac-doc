@@ -67,57 +67,12 @@ Shibboleth idp V2 的版本是一个标准的 Java web application，基于 Serv
 
 #### 使用反向代理
 
-idP 部署在 tomcat 上，可以设置 http 对 tomcat 的代理，以便于维护和增强扩展性。
-这里以 CentOS6 下 使用 apache 做 ajp 反向代理为例
+IdP 部署在 tomcat 上，可以对其进行反向代理来提供灵活性。
 
-取消 tomcat 的 AJP 身份认证
-修改```/opt/apache-tomcat-6.0.36/conf/server.xml```
-在 ```<!-- Define an AJP 1.3 Connector on port 8009 -->```下增加
-```xml
-request.tomcatAuthentication="false" address="127.0.0.1"
-```
-
-配置 apache 的 ajp 反向代理
-修改 httpd.conf
-```ProxyPass /idp/ ajp://localhost:8009/idp/```
+配置详见 [反向代理](https://eac.cloud.sh.edu.cn/document/proxy/)
 
 #### 部署 ssl 证书
 
-在 apache 上部署 ssl 证书可比 tomcat 容易多了
+HTTP 的 SSL 证书，可以采购商用证书，也可以使用 Let's Encrypt 自签。
 
-查看```/etc/httpd/conf.d/ssl.conf```
-在对应路径下部署证书
-
-#### idP 状态的查看
-
-可以访问这个地址 https://idp.example.org/idp/profile/Status
-如果 idP 服务正常，那么应该显示 ok
-
-也可以访问 https://idp.exmaple.org/idp/status
-可以查看更详细的 idP 状态信息
-
-后者默认只允许本机访问。可以修改 web.xml 来修改ACL。
-
-#### 服务的启停
-
-Tomcat服务的启停
-```
-/opt/apache-tomcat-6.0.36/bin/startup.sh
-/opt/apache-tomcat-6.0.36/bin/shutdown.sh
-```
-Apache服务的启停
-```
-Service start httpd
-Service stop httpd
-```
-
-可以设置为系统自动启动服务，仍以 CentOS 6 为例
-```
-Chkconfig httpd on
-Chkconfig ntpd on
-```
-修改```/etc/rc.local```
-添加
-```
-/opt/apache-tomcat-6.0.36/bin/startup.sh
-```
+配置详见 [SSL证书](https://eac.cloud.sh.edu.cn/document/lets_encrypt/)

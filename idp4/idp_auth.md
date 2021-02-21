@@ -1,4 +1,4 @@
-# 2.3.3 认证配置和属性对接-LDAP
+# 认证配置和属性对接-LDAP
 
 本文中的 `idp.home` 均指代实际的 idp 安装路径。例如 `/opt/shibboleth-idp`
 
