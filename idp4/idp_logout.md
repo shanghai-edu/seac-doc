@@ -55,3 +55,26 @@ IdP4 已经默认开启了 SLO 的相关端点，对于从 IdP3 升级而来的 
 idp.session.secondaryServiceIndex = true
 ```
 同样的，基于 `cookie` 的 `session` 存储不支持 `SAML SLO`，请开启 `HTML LocalStorage` 模式
+
+#### 非 SAML 模式的单点注销
+
+由于 shibboleth 的默认的单点注销方案无法支持回调参数，我们建议 IdP 增加一段纯前端的本地代码来协助实现这个功能。
+
+代码是开源的可供大家监督优化 - [idp-slo](https://github.com/shanghai-edu/idp-slo)
+
+首先拉取项目
+```
+cd /opt
+git clone https://github.com/shanghai-edu/idp-slo.git
+```
+在 Tomcat 的 `server.xml` 中增加映射配置
+```xml
+<Context path="logout" docBase="/opt/idp-slo/src/" debug="0" reloadable="true" crossContext="true"/>
+```
+
+在反向代理上也增加对应的配置，以 `nginx` 为例
+```
+      location /logout/ {
+          proxy_pass      http://127.0.0.1:8080/logout/;
+        }
+```

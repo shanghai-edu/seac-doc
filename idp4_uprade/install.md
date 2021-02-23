@@ -245,9 +245,9 @@ server {
       #  }
     
       # idp-slo https://github.com/shanghai-edu/idp-slo
-      location /logout/ {
-          proxy_pass      http://127.0.0.1:8080/logout/;
-        }
+      #location /logout/ {
+      #    proxy_pass      http://127.0.0.1:8080/logout/;
+      #  }
 
       # 记得要把原 IdP 服务器上的 https 证书拷过来，或者另外传一份证书，否则 nginx 起不来
       ssl_certificate /home/letsencrypt/certs/idp.xxx.edu.cn/fullchain.pem;
