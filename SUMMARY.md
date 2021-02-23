@@ -54,7 +54,7 @@
     * [2.3.10 属性释放配置](idp4/idp_filter.md)
     * [2.3.11 metadata 同步和注册](idp4/idp_metadata.md)
     * [2.3.12 注销配置](idp4/idp_logout.md)
-    * [2.3.13 访问日志](idp/auditlog.md)
+    * [2.3.13 访问日志](idp4/auditlog.md)
     * [2.3.14 CARSI-IdP 接入](idp4/idp_carsi.md)
     * [2.3.15 IdP 的监控](idp4/monitor.md)
 * [2.4 第三方解决方案](idpthird/README.md)
