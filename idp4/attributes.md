@@ -71,3 +71,8 @@ Shibboleth 支持内嵌脚本的方式来对属性进行自定义调整，如下
             ]]></Script>
     </AttributeDefinition>
 ``` 
+
+#### 完整示例
+[CARSI-IdP 接入](https://eac.cloud.sh.edu.cn/document/idp4/idp_carsi.html) 提供了一份同时接入 SEAC 和 CARSI 的完整配置示例。
+
+可以在此基础上进一步调整，供参考。
