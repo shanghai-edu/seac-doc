@@ -162,21 +162,21 @@ http {
     access_log  /var/log/nginx/access.log  main;
     # json 化日志，如搭配 elk 等日志服务器，则建议开启，更容易处理日志
     # log_format json '{"@timestamp":"$time_local",'
-                           '"server_addr":"$server_addr",'
-                           '"server_protocol":"$server_protocol",'
-                           '"remote_addr":"$remote_addr",'
-                           '"request_method":"$request_method",'
-                           '"body_bytes_sent":"$body_bytes_sent",'
-                           '"request_time":"$request_time",'
-                           '"upstream_response_time":"$upstream_response_time",'
-                           '"domain":"$http_host",'
-                           '"request":"$request",'
-                           '"uri":"$uri",'
-                           '"query_string":"$query_string",'
-                           '"http_x_forwarded_for":"$http_x_forwarded_for",'
-                           '"http_referer":"$http_referer",'
-                           '"http_user_agent":"$http_user_agent",'
-                           '"status":"$status"}';
+    #                       '"server_addr":"$server_addr",'
+    #                      '"server_protocol":"$server_protocol",'
+    #                       '"remote_addr":"$remote_addr",'
+    #                       '"request_method":"$request_method",'
+    #                       '"body_bytes_sent":"$body_bytes_sent",'
+    #                       '"request_time":"$request_time",'
+    #                       '"upstream_response_time":"$upstream_response_time",'
+    #                       '"domain":"$http_host",'
+    #                       '"request":"$request",'
+    #                       '"uri":"$uri",'
+    #                       '"query_string":"$query_string",'
+    #                       '"http_x_forwarded_for":"$http_x_forwarded_for",'
+    #                       '"http_referer":"$http_referer",'
+    #                       '"http_user_agent":"$http_user_agent",'
+    #                       '"status":"$status"}';
 
     server_tokens off;
     sendfile        on;

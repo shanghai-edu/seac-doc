@@ -123,7 +123,7 @@ grep `date -d -1hours +%Y-%m-%dT%H` /opt/shibboleth-idp/logs/idp-audit.log > /op
         deny all;
       }
 ```
-## UI 自定义
+### UI 自定义
 详见 [自定义 UI](https://eac.cloud.sh.edu.cn/document/idp4/ui.html)，重新配置各方面配置文件即可。
 
 ### 防暴力破解
