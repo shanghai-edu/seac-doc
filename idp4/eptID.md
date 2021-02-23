@@ -1,13 +1,93 @@
-# eptID 配置
+# eptID（NameID 生成） 配置
 
 eptID —— 即  eduPersonTargtedID ，他是根据用户名，IdP 的 entityID 和 SP 的 entityID 再加盐 Hash 后得到的脱敏字符串。
 
 对于某一个特定的 SP 而言，他可用于在不获取用户真实信息的前提下，区分不同用户。由于不同的 SP 之间得到的 eptID 不同，因此无法相互关联挖掘，从而保障用户隐私不被泄露。
 
-#### CoumputedId 模式
+#### NameID 生成
+修改 `saml-nameid.properties` ，配置 `nameid` 生成所需的各项参数。
+
+注意如果是从 IdP3 升级到 IdP4，则务必确保 ComputedId 切换而来，则务必保证 `idp.persistentId.sourceAttribute`，`idp.persistentId.salt`, `idp.persistentId.encoding` 与之前 ComutedId 中相关配置一致。否则会导致新生成的 eptID 与先前不一致。
+
+特别注意 `idp.persistentId.encoding` 新安装的默认值是 `BASE32`，而在 IdP3 中默认是 `BASE64`，**务必**注意升级前后的一致性。
+```ini
+idp.persistentId.sourceAttribute = eduPersonPrincipalName
+idp.persistentId.salt = xxxxxxxxxxxxxxxxxxxx
+idp.persistentId.encoding = BASE32
+```
+
+修改 `saml-nameid.xml` ,取消 `<ref bean="shibboleth.SAML2PersistentGenerator" />` 部分的注释。
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+                           
+       default-init-method="initialize"
+       default-destroy-method="destroy">
+
+    <!-- ========================= SAML NameID Generation ========================= -->
+
+    <!--
+    These generator lists handle NameID/Nameidentifier generation going forward. By default,
+    transient IDs for both SAML versions are enabled. The commented examples are for persistent IDs
+    and generating more one-off formats based on resolved attributes. The suggested approach is to
+    control their use via release of the underlying source attribute in the filter policy rather
+    than here, but you can set a property on any generator called "activationCondition" to limit
+    use in the most generic way.
+    
+    Most of the relevant configuration settings are controlled using properties; an exception is
+    the generation of arbitrary/custom formats based on attribute information, examples of which
+    are shown below.
+    
+    -->
+
+    <!-- SAML 2 NameID Generation -->
+    <util:list id="shibboleth.SAML2NameIDGenerators">
+
+        <ref bean="shibboleth.SAML2TransientGenerator" />
+
+        <!-- Uncommenting this bean requires configuration in saml-nameid.properties. -->
+        
+        <ref bean="shibboleth.SAML2PersistentGenerator" />
+        
+
+        <!--
+        <bean parent="shibboleth.SAML2AttributeSourcedGenerator"
+            p:omitQualifiers="true"
+            p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+            p:attributeSourceIds="#{ {'mail'} }" />
+        -->
+
+    </util:list>
+
+    <!-- SAML 1 NameIdentifier Generation -->
+    <util:list id="shibboleth.SAML1NameIdentifierGenerators">
+
+        <ref bean="shibboleth.SAML1TransientGenerator" />
+
+        <!--
+        <bean parent="shibboleth.SAML1AttributeSourcedGenerator"
+            p:omitQualifiers="true"
+            p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
+            p:attributeSourceIds="#{ {'mail'} }" />
+        -->
+
+    </util:list>
+
+</beans>
+```
+
+#### ComputedId 模式
 ComputedId 模式下，每次属性释放时都会自动计算生成 eptID，但不会对 eptID 进行存储。
 
-修改 `attribute-resolver.xml` 配置文件，增加如下配置。其中 `salt` 是为加盐字符串，建议随机生成一个。
+修改 `attribute-resolver.xml` 配置文件，添加 `ComputedId"` 相关的 `DataConnector`，其相关参数则会直接引用 `saml-nameid.properties` 中的配置。
 
 ```xml
 <AttributeDefinition id="eduPersonTargetedID" xsi:type="SAML2NameID" nameIdFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent">
@@ -15,8 +95,13 @@ ComputedId 模式下，每次属性释放时都会自动计算生成 eptID，但
     <AttributeEncoder xsi:type="SAML1XMLObject" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" encodeType="false"/>
     <AttributeEncoder xsi:type="SAML2XMLObject" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10" friendlyName="eduPersonTargetedID" encodeType="false"/>
 </AttributeDefinition>
-<DataConnector id="ComputedIDConnector" xsi:type="ComputedId" generatedAttributeID="computedID" salt="xxxxxxxxxxxxxxxxxxxx" encoding="BASE64">
-    <InputAttributeDefinition ref="eduPersonPrincipalName" />
+
+<DataConnector id="ComputedIDConnector" xsi:type="ComputedId"
+            generatedAttributeID="computedID"
+            salt="%{idp.persistentId.salt}"
+            algorithm="%{idp.persistentId.algorithm:SHA}"
+            encoding="%{idp.persistentId.encoding:BASE32}">
+        <InputAttributeDefinition ref="%{idp.persistentId.sourceAttribute}" />
 </DataConnector>
 ```
 
@@ -101,77 +186,14 @@ mysql> > exit;
 ```
 
 ##### 配置 IdP
-修改 `saml-nameid.xml` ,取消 `<ref bean="shibboleth.SAML2PersistentGenerator" />` 部分的注释。
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
-                           
-       default-init-method="initialize"
-       default-destroy-method="destroy">
 
-    <!-- ========================= SAML NameID Generation ========================= -->
-
-    <!--
-    These generator lists handle NameID/Nameidentifier generation going forward. By default,
-    transient IDs for both SAML versions are enabled. The commented examples are for persistent IDs
-    and generating more one-off formats based on resolved attributes. The suggested approach is to
-    control their use via release of the underlying source attribute in the filter policy rather
-    than here, but you can set a property on any generator called "activationCondition" to limit
-    use in the most generic way.
-    
-    Most of the relevant configuration settings are controlled using properties; an exception is
-    the generation of arbitrary/custom formats based on attribute information, examples of which
-    are shown below.
-    
-    -->
-
-    <!-- SAML 2 NameID Generation -->
-    <util:list id="shibboleth.SAML2NameIDGenerators">
-
-        <ref bean="shibboleth.SAML2TransientGenerator" />
-
-        <!-- Uncommenting this bean requires configuration in saml-nameid.properties. -->
-        
-        <ref bean="shibboleth.SAML2PersistentGenerator" />
-        
-
-        <!--
-        <bean parent="shibboleth.SAML2AttributeSourcedGenerator"
-            p:omitQualifiers="true"
-            p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
-            p:attributeSourceIds="#{ {'mail'} }" />
-        -->
-
-    </util:list>
-
-    <!-- SAML 1 NameIdentifier Generation -->
-    <util:list id="shibboleth.SAML1NameIdentifierGenerators">
-
-        <ref bean="shibboleth.SAML1TransientGenerator" />
-
-        <!--
-        <bean parent="shibboleth.SAML1AttributeSourcedGenerator"
-            p:omitQualifiers="true"
-            p:format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"
-            p:attributeSourceIds="#{ {'mail'} }" />
-        -->
-
-    </util:list>
-
-</beans>
-```
-安装 Java 的 MysQL 驱动，注意 $TOMCAT_HOME 替换为你实际安装 TOMCAT 的路径
+安装 Java 的 MysQL 驱动，注意在 CentOS7 上用 yum 安装时，会自动依赖安装 java8，装完别忘记把 java8 卸载掉。
 ```
 yum -y install mysql-connector-java
-ln -s /usr/share/java/mysql-connector-java.jar $TOMCAT_HOME/lib/
+cp /usr/share/java/mysql-connector-java.jar /opt/shibboleth-idp/edit-webapp/WEB-INF/lib/mysql-connector-java.jar
+chown tomcat:tomcat /opt/shibboleth-idp/edit-webapp/WEB-INF/lib/mysql-connector-java.jar
+yum remove java-1.8*
+/opt/shibboleth-idp/bin/build.sh
 ```
 修改`global.xml`， 配置数据库连接
 ```xml
@@ -187,7 +209,7 @@ p:validationQuery="select 1"
 p:validationQueryTimeout="5" />
 ```
 
-修改 `saml-nameid.properties` ，配置 `nameid` 生成所需的各项参数。注意如果是从 ComputedId 切换而来，则务必保证 `idp.persistentId.sourceAttribute`，`idp.persistentId.salt`, `idp.persistentId.encoding` 与之前 ComutedId 中相关配置一致。否则会导致新生成的 eptID 与先前不一致。
+修改 `saml-nameid.properties` ，配置 `nameid` 生成所以来的数据库源。
 ```ini
 idp.persistentId.sourceAttribute = eduPersonPrincipalName
 idp.persistentId.salt = xxxxxxxxxxxxxxxxxxxx
@@ -205,4 +227,16 @@ idp.persistentId.dataSource = MyDataSource
     <InputAttributeDefinition ref="%{idp.persistentId.sourceAttribute}"/>
     <BeanManagedConnection>MyDataSource</BeanManagedConnection>
 </DataConnector>
+```
+
+#### 隐藏属性确认
+
+在 IdP4 中，eptID 不再是默认的隐藏属性，因此在用户确认页面上会看到这个字段。
+
+如果需要隐藏掉他的话，则修改 `/opt/shibboleth-idp/conf/intercept/consent-intercept-config.xml` 配置文件，在 `shibboleth.consent.attribute-release.BlacklistedAttributeIDs` 增加配置即可。
+```xml
+    <util:list id="shibboleth.consent.attribute-release.BlacklistedAttributeIDs">
+        <value>samlPairwiseID</value>
+        <value>eduPersonTargetedID</value>
+    </util:list>
 ```
