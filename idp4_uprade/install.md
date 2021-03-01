@@ -44,10 +44,14 @@ yum -y install wget lrzsz unzip git
 ## web中间件
 ### tomcat
 安装 [Tomcat(https://tomcat.apache.org/download-90.cgi)
+
+注意下载 Tomcat 的最新版本来完成安装。示例中是 `9.0.41`
+
+这里我们给他创建一个 `latest` 软链接，以便于将来升级。
 ```
 sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
 cd /tmp
-wget https://mirror.bit.edu.cn/apache/tomcat/tomcat-9/v9.0.41/bin/apache-tomcat-9.0.41.tar.gz
+wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.41/bin/apache-tomcat-9.0.41.tar.gz
 tar -zxvf apache-tomcat-9.0.41.tar.gz
 mv apache-tomcat-9.0.41 /opt/tomcat/apache-tomcat-9.0.41
 sudo ln -s /opt/tomcat/apache-tomcat-9.0.41 /opt/tomcat/latest
@@ -101,6 +105,29 @@ systemctl daemon-reload
 sudo systemctl enable tomcat
 sudo systemctl start tomcat
 ```
+### Tomcat 的升级
+由于我们是手动安装的 Tomcat，所以现在我们需要手动给他升级了。由于我们已经创建了 `latest` 软链接，因此升级是很方便的
+
+下载最新版本的 tomcat, 示例中是 `9.0.43`
+```
+cd /tmp
+wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.43/bin/apache-tomcat-9.0.43.tar.gz
+tar -zxvf apache-tomcat-9.0.43.tar.gz
+mv apache-tomcat-9.0.43 /opt/tomcat/apache-tomcat-9.0.43
+```
+将关键配置迁移到新版本上，然后修改软链接并重启 Tomcat 
+```
+mkdir /opt/tomcat/apache-tomcat-9.0.43/conf/Catalina/
+mkdir /opt/tomcat/apache-tomcat-9.0.43/conf/Catalina/localhost/
+cp /opt/tomcat/latest/conf/Catalina/localhost/idp.xml /opt/tomcat/apache-tomcat-9.0.43/conf/Catalina/localhost/idp.xml
+cp /opt/tomcat/latest/conf/server.xml /opt/tomcat/apache-tomcat-9.0.43/conf/server.xml
+sudo ln -snf /opt/tomcat/apache-tomcat-9.0.43 /opt/tomcat/latest
+chown -R tomcat: /opt/tomcat
+sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
+systemctl restart tomcat
+```
+如果升级出现异常，将软连接修改回老版本即可完成回退。
+
 
 ### 反向代理
 我们建议将 IdP 通过反向代理发布，以获得更好的性能和安全性
