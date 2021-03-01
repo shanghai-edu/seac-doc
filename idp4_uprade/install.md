@@ -49,7 +49,7 @@ sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
 cd /tmp
 wget https://mirror.bit.edu.cn/apache/tomcat/tomcat-9/v9.0.41/bin/apache-tomcat-9.0.41.tar.gz
 tar -zxvf apache-tomcat-9.0.41.tar.gz
-mv apache-tomcat-9.0.41 /opt/tomcat
+mv apache-tomcat-9.0.41 /opt/tomcat/apache-tomcat-9.0.41
 sudo ln -s /opt/tomcat/apache-tomcat-9.0.41 /opt/tomcat/latest
 chown -R tomcat: /opt/tomcat
 sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
