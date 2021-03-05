@@ -336,7 +336,7 @@ INFO [net.shibboleth.idp.installer.BuildWar:99] - Creating war file /opt/shibbol
 BUILD SUCCESSFUL
 Total time: 24 seconds
 
-chown tomcat:tomcat /opt/shibboleth-idp/
+chown -R tomcat:tomcat /opt/shibboleth-idp/
 ```
 
 为 IdP 创建加载 `war` 文件的配置，新建 `/opt/tomcat/latest/conf/Catalina/localhost/idp.xml` 文件
