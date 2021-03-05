@@ -1,4 +1,4 @@
-# 2.3.1 微软 ADFS
+# 微软 ADFS
 
 Active Directory 联合身份验证服务（AD FS，Active Directory Federation Services）是由微软自Windows Server 2003 R2起，在各个Server版本操作系统中提供的一个软件组件。他也可以支持 SAML 协议，因此可以作为 IdP 接入 SEAC 或者 CARSI。
 
