@@ -31,6 +31,8 @@ chronyc>
 ```
 ### java 环境
 安装 java 11
+
+注意检查 java -version 的输出确保 java 环境已经是 11
 ```
 yum -y install java-11-openjdk java-11-openjdk-devel
 java -version
@@ -71,7 +73,7 @@ sh -c 'chmod +x /opt/tomcat/latest/bin/*.sh'
 </Server>
 ```
 
-注册 systemctl , `tomcat.service` 的内容如下所示。其中 `CATALINA_OPTS` 部分的 `JVM` 参数建议根据服务器实际内存大小和负载情况在灵活调整。
+注册 systemctl , 新建一个 `tomcat.service` 文件，内容如下所示。其中 `CATALINA_OPTS` 部分的 `JVM` 参数建议根据服务器实际内存大小和负载情况在灵活调整。
 ```ini
 [Unit]
 Description=Tomcat 9 servlet container
@@ -98,7 +100,7 @@ ExecStop=/opt/tomcat/latest/bin/shutdown.sh
 WantedBy=multi-user.target
 ```
 
-注册为 systemctl
+将其复制到 `/etc/systemd/system/`，注册到 systemctl
 ```
 cp tomcat.service /etc/systemd/system/tomcat.service
 systemctl daemon-reload
@@ -337,7 +339,7 @@ Total time: 24 seconds
 chown tomcat:tomcat /opt/shibboleth-idp/
 ```
 
-修改 `tomcat` 配置 `/opt/tomcat/latest/conf/Catalina/localhost/idp.xml` 加载 `idp.war`
+为 IdP 创建加载 `war` 文件的配置，新建 `/opt/tomcat/latest/conf/Catalina/localhost/idp.xml` 文件
 ```xml
 <Context docBase="/opt/shibboleth-idp/war/idp.war"
          privileged="true"
