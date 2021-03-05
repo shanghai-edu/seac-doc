@@ -7,6 +7,11 @@
 
 为了避免冲突，修改 `/opt/shibboleth-idp/conf/attributes/default-rules.xml`，将默认 `import` 注释掉，修改为 [seac.xml](https://eac.cloud.sh.edu.cn/download/seac.xml) 和 [carsi.xml](https://eac.cloud.sh.edu.cn/download/carsi.xml)
 
+- 注意如果 tomcat 的权限不是 root，在上传 `seac.xml` 和 `carsi.xml` 后务必更新下相关目录的权限，例如：
+```
+chown -R tomcat:tomcat /opt/shibboleth-idp/
+```
+
 ```xml
 <!--
     <import resource="inetOrgPerson.xml" />

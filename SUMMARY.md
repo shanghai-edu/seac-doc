@@ -35,7 +35,7 @@
     * [2.1.11 metadata 同步和注册](idp4/idp_metadata.md)
     * [2.1.12 注销配置](idp4/idp_logout.md)
     * [2.1.13 访问日志](idp4/auditlog.md)
-    * [2.1.14 CARSI-IdP 接入](idp4/idp_carsi.md)
+    * [2.1.14 完整配置示例](idp4/idp_carsi.md)
     * [2.1.15 IdP 的监控](idp4/monitor.md)
 * [2.2 第三方解决方案](idpthird/README.md)
     * [2.2.1 微软 ADFS](idpthird/adfs.md)
