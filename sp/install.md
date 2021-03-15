@@ -41,7 +41,7 @@
 ```
 <SSO discoveryProtocol="SAMLDS" discoveryURL="https://ds.shec.edu.cn/ds/WAYF">
   SAML2 SAML1
-</SSO>shec.edu.cn
+</SSO>
 ```
 如果使用嵌入式 DS 此处请参考嵌入式 DS 部分
 

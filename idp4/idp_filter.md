@@ -33,6 +33,7 @@
              <Rule xsi:type="Requester" value="https://sdauth.sciencedirect.com/" />
              <Rule xsi:type="Requester" value="https://sptest.ecnu.edu.cn/shibboleth" />
              <Rule xsi:type="Requester" value="https://whoami.cloud.sh.edu.cn/shibboleth" />
+             <Rule xsi:type="Requester" value="https://ds.hainnu.edu.cn/shibboleth" />    
          </PolicyRequirementRule>
          <AttributeRule attributeID="eduPersonEntitlement" permitAny="true" />
      </AttributeFilterPolicy>
@@ -57,6 +58,7 @@
              <Rule xsi:type="Requester" value="https://sog-seman.cloud.sh.edu.cn/shibboleth" />
              <Rule xsi:type="Requester" value="https://sog-zongguan.cloud.sh.edu.cn/shibboleth" />
              <Rule xsi:type="Requester" value="https://resource.cloud.sh.edu.cn/shibboleth" />
+             <Rule xsi:type="Requester" value="https://ds.hainnu.edu.cn/shibboleth" />
          </PolicyRequirementRule>
             <AttributeRule attributeID="uid" permitAny="true" />
             <AttributeRule attributeID="cn" permitAny="true" />
