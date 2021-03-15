@@ -91,6 +91,8 @@ remote: Total 10 (delta 1), reused 7 (delta 1), pack-reused 0
 Unpacking objects: 100% (10/10), done.
 [root@idp home]# 
 ```
+- 由于 github.com 近期存在访问不稳定的现象。也可以使用 gitee.com 上的备份仓库 https://gitee.com/ecnunic_qfeng/attribute-filter-policy
+
 ##### 尝试手动执行脚本
 ```
 [root@idp conf]# /home/attribute-filter-policy/update_policy.sh     
