@@ -217,7 +217,7 @@
              <Rule xsi:type="Requester" value="https://whoami.cloud.sh.edu.cn/shibboleth" />
              <Rule xsi:type="Requester" value="https://sog-test.cloud.sh.edu.cn/shibboleth" />
              <Rule xsi:type="Requester" value="https://sog-seman.cloud.sh.edu.cn/shibboleth" />
-             <Rule xsi:type="Requester" value="https://sog-zongguan.cloud.sh.edu.cn/shibboleth" />
+             <Rule xsi:type="Requester" value="https://i-sog.shec.edu.cn/shibboleth" />
              <Rule xsi:type="Requester" value="https://resource.cloud.sh.edu.cn/shibboleth" />
          </PolicyRequirementRule>
             <AttributeRule attributeID="uid" permitAny="true" />
