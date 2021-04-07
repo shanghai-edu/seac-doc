@@ -163,7 +163,7 @@
 </AttributeResolver>
 ```
 ### attribute-filter
-修改 `attribute-filter.xml` 确保两个联盟的属性都已经得到释放，注意属性策略可能会随着联盟发展进一步更新。建议采取[自动同步方案](https://eac.cloud.sh.edu.cn/document/idp3/idp_filter.html)获取最新的属性策略。
+修改 `attribute-filter.xml` 确保两个联盟的属性都已经得到释放，注意属性策略可能会随着联盟发展进一步更新。建议采取[自动同步方案](https://eac.cloud.sh.edu.cn/document/idp4/idp_filter.html)获取最新的属性策略。
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
