@@ -40,6 +40,20 @@
     </DataConnector>
 ```
 
+### 插件（CAS/Oauth）获取属性
+
+在最新的wiki中已经指出了，不推荐使用SubjectDerivedAttribute模式，转为使用[SubjectDataConnector](https://wiki.shibboleth.net/confluence/display/IDP4/SubjectDataConnector)模式。
+
+其中exportAttributes为从插件侧获取的属性名。
+
+以下是从 CAS/Oauth 获取属性的参考配置的连接器
+
+```xml
+<DataConnector id="mySubjectData" xsi:type="Subject" exportAttributes="UID XM TYPEOF" />
+```
+
+
+
 ### 数据库获取属性
 
 shibboleth 也支持从数据库中读取属性
