@@ -29,7 +29,10 @@ chown -R tomcat:tomcat /opt/shibboleth-idp/
 #### Simple 模式
 Simple 是最简单的属性获取模式。只需要定义属性的数据来源，和属性的名称即可。
 
-例如以下的3个属性，`uid` 和 `cn` 来自于 `myLDAP` 数据连接器。，而 `domainName` 则来自基于 `staticAttributes` 数据连接器。
+例如以下的3个属性，根据连接方式的不同，`uid` 和 `cn` 来自于 `myLDAP/mySubjectData` 数据连接器，而 `domainName` 则来自基于 `staticAttributes` 数据连接器。
+
+##### ldap版：
+
 ```xml
    <AttributeDefinition xsi:type="Simple" id="uid">
         <InputDataConnector ref="myLDAP" attributeNames="uid"/>
@@ -45,23 +48,43 @@ Simple 是最简单的属性获取模式。只需要定义属性的数据来源�
    </AttributeDefinition>
 ```
 
-#### SubjectDerivedAttribute 模式
-在进行 CAS/OAuth2 对接时，我们通过`xsi:type="SubjectDerivedAttribute"` 模式，从插件中获取属性的配置，例如下面的示例的映射关系如下所示：
-
-- ID_NUMBER -> uid
-- USER_NAME -> cn
-- TYPE_NAME -> typeOf
+##### Cas/Oauth版:
 
 ```xml
-   <AttributeDefinition xsi:type="SubjectDerivedAttribute" id="uid" principalAttributeName="ID_NUMBER">
+   <AttributeDefinition xsi:type="Simple" id="uid">
+        <InputDataConnector ref="mySubjectData" attributeNames="UID"/>
    </AttributeDefinition>
 
-   <AttributeDefinition xsi:type="SubjectDerivedAttribute" id="cn" principalAttributeName="USER_NAME">
+
+   <AttributeDefinition xsi:type="Simple" id="cn">
+        <InputDataConnector ref="mySubjectData" attributeNames="XM"/>
    </AttributeDefinition>
 
-   <AttributeDefinition xsi:type="SubjectDerivedAttribute" id="typeOf" principalAttributeName="TYPE_NAME">
+   <AttributeDefinition xsi:type="Simple" id="domainName">
+        <InputDataConnector ref="staticAttributes" attributeNames="domainName"/>
    </AttributeDefinition>
 ```
+
+
+
+#### SubjectDerivedAttribute 模式
+
+**此模式wiki已经不再推荐，推荐使用更方便也更优雅的SubjectDataConnector模式，请参考数据连接器中相关说明。**
+
+~~在进行 CAS/OAuth2 对接时，我们通过`xsi:type="SubjectDerivedAttribute"` 模式，从插件中获取属性的配置，例如下面的示例的映射关系如下所示：~~
+
+- ~~ID_NUMBER -> uid~~
+- ~~USER_NAME -> cn~~
+- ~~TYPE_NAME -> typeOf~~
+
+   ~~<AttributeDefinition xsi:type="SubjectDerivedAttribute" id="uid" principalAttributeName="ID_NUMBER">~~
+   ~~</AttributeDefinition>~~
+
+   ~~<AttributeDefinition xsi:type="SubjectDerivedAttribute" id="cn" principalAttributeName="USER_NAME">~~
+   ~~</AttributeDefinition>~~
+
+   ~~<AttributeDefinition xsi:type="SubjectDerivedAttribute" id="typeOf" principalAttributeName="TYPE_NAME">~~
+   ~~</AttributeDefinition>~~
 
 #### ScriptedAttribute 模式
 Shibboleth 支持内嵌脚本的方式来对属性进行自定义调整，如下例所示，表示根据 `uid` 的长度来进行身份的判断
@@ -75,7 +98,7 @@ Shibboleth 支持内嵌脚本的方式来对属性进行自定义调整，如下
         typeOf.addValue(localpart);
             ]]></Script>
     </AttributeDefinition>
-``` 
+```
 
 #### 完整示例
 [CARSI-IdP 接入](https://eac.cloud.sh.edu.cn/document/idp4/idp_carsi.html) 提供了一份同时接入 SEAC 和 CARSI 的完整配置示例。
